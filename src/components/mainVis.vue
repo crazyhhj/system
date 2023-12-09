@@ -18,7 +18,9 @@
             </defs>
             
         </svg>
-        <div id="rhythm-line" style="float: right; width: 55%; height: 100%;"></div>
+        <div id="rhythm-line" style="float: right; width: 55%; height: 100%;">
+
+        </div>
         
     </div>
 </template>
@@ -26,6 +28,7 @@
 <script>
 import * as d3 from 'd3'
 import { mapState } from "vuex";
+import * as echarts from 'echarts'
 
 export default {
     name: 'mainVis',
