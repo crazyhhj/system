@@ -82,9 +82,8 @@
 
       <location />
 
-      <mixLine/>
+      <!-- <mixLine/> -->
       <pracitePic />
-      
     </div>
 
     <div>
@@ -92,6 +91,8 @@
     </div>
   </div>
   <personAnalysis/>
+  <rhythm />
+
   <!-- ____---------------____---------------____---------------____---------------____---------------____---------------____--------------- -->
 </template>
   
@@ -105,14 +106,14 @@ import pracitePic from './components/pracitePic.vue';
 import scheduling from './components/schedulingStrip.vue';
 import redaPic from './components/redaPic.vue';
 import bertInfo from './components/bertInfo.vue';
-import mixLine from './components/mixLine.vue';
+// import mixLine from './components/mixLine.vue';
 import dialogueBox from './components/dialogueBox.vue';
 import heartLine from './components/heartLine.vue';
 import mainVis from './components/mainVis.vue'
 import personAnalysis from './components/personAnalysis.vue';
+import rhythm from './components/rhythm.vue';
 
 import axios from 'axios';
-import { tree } from 'd3';
 
 
 export default {
@@ -127,11 +128,12 @@ export default {
     scheduling,
     redaPic,
     bertInfo,
-    mixLine,
+    // mixLine,
     dialogueBox,
     heartLine,
     mainVis,
-    personAnalysis
+    personAnalysis,
+    rhythm,
   },
   data() {
     return {
