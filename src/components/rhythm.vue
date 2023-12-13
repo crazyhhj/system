@@ -28,7 +28,6 @@ export default {
     methods: {
         showRhythmLine() {
             var dom = this.$refs.rhythmLineArea;
-            console.log(dom);
             // var myChart = echarts.init(chartDom);
             var myChart = echarts.init(dom, null, {
                 renderer: 'canvas',
@@ -48,11 +47,13 @@ export default {
                 }
                 fakeData.push(data);
             }
+            const data = this.$store.getters.getScheduling;
+            console.log(data);
             myChart.showLoading();
             function doChart(data) {
                 myChart.hideLoading();
                 var base = -data.reduce(function (min, val) {
-                    return Math.floor(Math.min(min, val.l));
+                    return Math.floor(Math.min(min, val.emotion));
                 }, Infinity);
                 myChart.setOption(
                     (option = {
@@ -94,11 +95,10 @@ export default {
                         xAxis: {
                             type: 'category',
                             data: data.map(function (item) {
-                                return item.date;
+                                return item.id;
                             }),
                             axisLabel: {
                                 formatter: function (value, idx) {
-                                    var date = value;
                                     return idx === 0
                                         ? value
                                         : value;
@@ -126,19 +126,20 @@ export default {
                                 name: 'L',
                                 type: 'line',
                                 data: data.map(function (item) {
-                                    return item.l + base;
+                                    return item.emotion + base;
                                 }),
                                 lineStyle: {
                                     opacity: 0
                                 },
                                 stack: 'confidence-band',
-                                symbol: 'none'
+                                symbol: 'none',
+                                smooth:true,
                             },
                             {
                                 name: 'U',
                                 type: 'line',
                                 data: data.map(function (item) {
-                                    return item.u - item.l;
+                                    return item.event - item.emotion;
                                 }),
                                 lineStyle: {
                                     opacity: 0
@@ -147,12 +148,14 @@ export default {
                                     color: 'red'
                                 },
                                 stack: 'confidence-band',
-                                symbol: 'none'
+                                symbol: 'none',
+                                smooth:true,
+
                             },
                             {
                                 type: 'line',
                                 data: data.map(function (item) {
-                                    return item.value + base;
+                                    return item.content + base;
                                 }),
                                 itemStyle: {
                                     color: '#333'
@@ -163,7 +166,7 @@ export default {
                     })
                 );
             };
-            doChart(fakeData)
+            doChart(data)
             option && myChart.setOption(option);
 
         },
