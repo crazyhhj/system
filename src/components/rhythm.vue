@@ -49,6 +49,10 @@ export default {
                 fakeData.push(data);
             }
             const data = this.$store.getters.getScheduling;
+<<<<<<< HEAD
+=======
+            console.log(data);
+>>>>>>> 5e9fefd46fd7616fedd1967e4ad0b71c23263d94
             myChart.showLoading();
             function doChart(data) {
                 myChart.hideLoading();
@@ -96,8 +100,12 @@ export default {
                             type: 'category',
                             // type: 'value',
                             data: data.map(function (item) {
+<<<<<<< HEAD
                                 return item.screen;
                                 // return item.id;
+=======
+                                return item.id;
+>>>>>>> 5e9fefd46fd7616fedd1967e4ad0b71c23263d94
                             }),
                             axisLabel: {
                                 formatter: function (value, idx) {
