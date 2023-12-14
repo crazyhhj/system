@@ -1,7 +1,8 @@
 <template>
     <button @click="showRhythmLine">点击显示</button>
-    <div ref="rhythmLineArea" style="height: 1000px;">
-
+    <div>
+        <div class="chartContainer" ref="rhythmLineArea" ></div>
+        <div class="chartContainer" id="chainChart" style="height:200px;"></div>
     </div>
 </template>
 
@@ -28,7 +29,6 @@ export default {
     methods: {
         showRhythmLine() {
             var dom = this.$refs.rhythmLineArea;
-            console.log(dom);
             // var myChart = echarts.init(chartDom);
             var myChart = echarts.init(dom, null, {
                 renderer: 'canvas',
@@ -57,7 +57,7 @@ export default {
                 myChart.setOption(
                     (option = {
                         title: {
-                            text: 'Confidence Band',
+                            text: 'rhythm_line',
                             subtext: 'Example in MetricsGraphics.js',
                             left: 'center'
                         },
@@ -165,11 +165,50 @@ export default {
             };
             doChart(fakeData)
             option && myChart.setOption(option);
+            this.showChain()
 
         },
+        showChain(){
+            const containerWidth = d3.select('#chainChart').node().clientWidth;
+            const containerHeight = d3.select('#chainChart').node().clientHeight;
+            console.log(containerWidth, containerHeight);
+            const svg = d3.select("#chainChart")
+                            .append('svg')
+                            .attr('width', '100%')
+                            .attr('height', '100%');
+            const chain_g = svg.append('g').attr('id', 'chain_g');
 
+            const chain_list = chain_g.selectAll("chain_list_g")
+                                    .data([1,2,3,4,5])
+                                    .join('g')
+                                    .attr('class','chain_list_g')
+                                    .attr('transform',(d,r,a)=>`translate(0,${(containerHeight/a.length)*r})`)
+            chain_list.append('rect')
+                        .attr('class','person_cloumn')
+                        .attr('width', containerWidth)
+                        .attr('height', (d,r,a)=>containerHeight/a.length)
+                        .attr('x', 0)
+                        .attr('y', 0)
+                        .style('fill', (d,r)=>r%2==0?'#8da8c5':'#ffffff')
+            chain_list.selectAll('person_circle')
+                        .data(new Array(10).fill(0))
+                        .join('circle')
+                        .attr('class', 'person_circle')
+                        .attr('r', 8)
+                        .attr('cx',(d,r)=>20+r*80)
+                        .attr('cy',20)
+                        // .style('fill', (d,r)=>r%2==0?'#ffffff': '#000000')
+                        .style('fill', 'red')
+
+        }
     }
 }
 </script>
 
-<style></style>
+<style>
+    .chartContainer{
+        width: 800px;
+        height: 400px;
+        color: #ffffff;
+    }
+</style>
