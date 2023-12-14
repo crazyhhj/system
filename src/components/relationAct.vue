@@ -67,7 +67,7 @@ export default {
     methods: {
         getLinks(){
             let _self =this;
-            axios.get('http://10.1.115.30:5000/api/post/relationactor')
+            axios.get('http://127.0.0.1:5000/api/post/relationactor')
                 .then(
                     res => {
                         let msg = res.data;

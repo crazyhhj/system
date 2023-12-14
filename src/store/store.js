@@ -90,7 +90,7 @@ const store = createStore({
     },
     getScreenPlay(state){
       let _self =state;
-      axios.get('http://10.1.115.30:5000/api/post/screenplay')
+      axios.get('http://127.0.0.1:5000/api/post/screenplay')
           .then(
               res => {
                   let msg = res.data;
@@ -105,7 +105,7 @@ const store = createStore({
     },
     getLinks(state){
       let _self =state;
-      axios.get('http://10.1.115.30:5000/api/post/relationactor')
+      axios.get('http://127.0.0.1:5000/api/post/relationactor')
           .then(
               res => {
                   let msg = res.data;
@@ -120,7 +120,7 @@ const store = createStore({
     },
     getActorEmoSlug(state){
       let _self =state;
-      axios.get('http://10.1.115.30:5000/api/post/actorEmotionSlug')
+      axios.get('http://127.0.0.1:5000/api/post/actorEmotionSlug')
           .then(
               res => {
                   let msg = res.data;
@@ -146,7 +146,7 @@ const store = createStore({
     },
     gainSlugInfo(state){
       let _self =state;
-      axios.get('http://10.1.115.30:5000/api/post/sluginfo')
+      axios.get('http://127.0.0.1:5000/api/post/sluginfo')
           .then(
               res => {
                   let msg = res.data;
@@ -161,7 +161,7 @@ const store = createStore({
 
     get_event_dialogue_data(state){
       let _self =state;
-      axios.get('http://10.1.115.30:5000/api/post/event_dialogue')
+      axios.get('http://127.0.0.1:5000/api/post/event_dialogue')
           .then(
               res => {
                   let msg = res.data;
@@ -230,7 +230,7 @@ slugIndex
     },
     getLocationInfo(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/locationInfo')
+      axios.get('http://127.0.0.1:5000/api/post/locationInfo')
       .then(
           res=>{
               let msg = res.data;
@@ -244,7 +244,7 @@ slugIndex
     },
     getEventType(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/event_type')
+      axios.get('http://127.0.0.1:5000/api/post/event_type')
       .then(
           res=>{
               let msg = res.data;
@@ -258,7 +258,7 @@ slugIndex
     },
     getGptText(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/gpttext')
+      axios.get('http://127.0.0.1:5000/api/post/gpttext')
       .then(
           res=>{
               let msg = res.data;
@@ -272,7 +272,7 @@ slugIndex
     },
     getScreenByTrans(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/screenplay_group')
+      axios.get('http://127.0.0.1:5000/api/post/screenplay_group')
       .then(
           res=>{
               let msg = res.data;
@@ -287,7 +287,7 @@ slugIndex
     // 人物频次
     getActorFre(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/actor')
+      axios.get('http://127.0.0.1:5000/api/post/actor')
       .then(
           res=>{
               let msg = res.data;
@@ -301,7 +301,7 @@ slugIndex
     },
     getSocial(state){
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/social')
+      axios.get('http://127.0.0.1:5000/api/post/social')
       .then(
           res=>{
               let msg = res.data;
@@ -316,7 +316,7 @@ slugIndex
 
     getActorEverySLug(state) {
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/actoremo')
+      axios.get('http://127.0.0.1:5000/api/post/actoremo')
       .then(
           res => {
               let msg = res.data;
@@ -331,7 +331,7 @@ slugIndex
 
     getDialogue(state) {
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/dialogue')
+      axios.get('http://127.0.0.1:5000/api/post/dialogue')
       .then(
           res => {
               let msg = res.data;
@@ -345,7 +345,7 @@ slugIndex
 
     getAllTextToGpt(state) {
       let _self = state;
-      axios.get('http://10.1.115.30:5000/api/post/alltext')
+      axios.get('http://127.0.0.1:5000/api/post/alltext')
       .then(
           res => {
               let msg = res.data;

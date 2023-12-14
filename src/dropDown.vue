@@ -707,7 +707,7 @@
             },
             getInfo(){
                 let _self = this;
-                axios.get('http://10.1.115.12:5000/api/post/actoremo')
+                axios.get('http://127.0.0.1:5000/api/post/actoremo')
                 .then(
                     res=>{
                         let msg = res.data;
@@ -719,14 +719,14 @@
                     console.log(error);
                 })
 
-                axios.get('http://10.1.115.12:5000/api/post/screenplay')
+                axios.get('http://127.0.0.1:5000/api/post/screenplay')
                 .then(
                     res=>{
                         let msg = res.data;
                         _self.slugline = msg;
                     }
                 )
-                axios.get('http://10.1.115.12:5000/api/post/fenbu')
+                axios.get('http://127.0.0.1:5000/api/post/fenbu')
                 .then(
                     res=>{
                         let msg = res.data;

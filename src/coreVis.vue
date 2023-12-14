@@ -161,7 +161,7 @@ export default {
     },
     getSlug() {
       // let _self = this;
-      axios.get('http://10.1.115.30:5000/api/post/textscreen')
+      axios.get('http://127.0.0.1:5000/api/post/textscreen')
         .then(
           res => {
             let msg = res.data;
@@ -188,7 +188,7 @@ export default {
       this.$store.commit('getGptText');
     },
     getSchedulingData() {
-      axios.get("http://10.1.115.30:5000/api/post/scheduling")
+      axios.get("http://127.0.0.1:5000/api/post/scheduling")
         .then(
           res => {
             let msg = res.data;

@@ -52,7 +52,7 @@ export default {
     methods: {
         getInfo() {
             let _self = this;
-            axios.get('http://10.1.115.30:5000/api/post/actoremo')
+            axios.get('http://127.0.0.1:5000/api/post/actoremo')
                 .then(
                     res => {
                         let msg = res.data;
@@ -64,7 +64,7 @@ export default {
                     console.log(error);
                 })
 
-            axios.get('http://10.1.115.30:5000/api/post/screenplay')
+            axios.get('http://127.0.0.1:5000/api/post/screenplay')
                 .then(
                     res => {
                         let msg = res.data;
