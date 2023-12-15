@@ -3,11 +3,11 @@
     <!-- <button @click="show">项目</button> -->
     <div v-if="switch2" id="main-manager">
       <el-container>
-        <el-header style="height: 105px;">
+        <!-- <el-header style="height: 105px;">
           <div>
             <scheduling />
           </div>
-        </el-header>
+        </el-header> -->
         <el-container>
           <el-aside>
             <div class="page-container" style="height: 80px; background-color: #b6caf5"  id="headAssembly">
