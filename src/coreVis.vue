@@ -2,6 +2,7 @@
   <div v-if="true">
     <!-- <button @click="show">项目</button> -->
     <div v-if="switch2" id="main-manager">
+
       <el-container>
         <!-- <el-header style="height: 105px;">
           <div>
@@ -9,14 +10,12 @@
           </div>
         </el-header> -->
         <el-container>
-          <el-aside>
-            <div class="page-container" style="height: 80px; background-color: #b6caf5"  id="headAssembly">
-              <button class="exist" @click="getSlug">获得章节、人物关系数据</button>
-            </div>
-            <div class="el-aside1">
-              <slideText />
-            </div>
+          <el-aside style="width: 300px;">
+            <!-- <div class="page-container" style="height: 80px; background-color: #b6caf5"  id="headAssembly"> -->
+              <!-- <button class="exist" @click="getSlug" style="float: left;">获得章节、人物关系数据</button> -->
+            <personAnalysis/>
           </el-aside>
+
           <el-container>
             <!-- <el-main>Main1<router-view>
                 <distribute />
@@ -146,7 +145,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$parent);
+    // console.log(this.$parent);
+    this.getSlug()
   },
   watch: {
 
@@ -237,7 +237,7 @@ export default {
   background-color: #D3DCE6;
   color: #333;
   text-align: center;
-  line-height: 200px;
+  /* line-height: 200px; */
 }
 
 .el-aside::-webkit-scrollbar {

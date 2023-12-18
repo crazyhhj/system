@@ -1,6 +1,6 @@
 <template>
     <div class="tab" id="mainVis" style="width: 100%; height: 100%;">
-        <div class="main_title" style="width: 100%; height: 5%; background-color: #b6caf5; ">
+        <div class="main_title" style="width: 100%; height: 5%; background-color: #94b2d2; ">
             <div class="main_sub_title" style="width: 80px; left: 0px;">
             <span>SENCE <br> RECT</span>
             </div>
@@ -8,7 +8,7 @@
             <div class="main_sub_title" style="width: 310px; "><span>PERSON DROWN</span> </div>
             <div class="main_sub_title" style="width: 768px;  border-right:1px dashed black;"><span>PLOT SCORE ANALYSE</span></div>
         </div>
-        <svg id="mainSvg" style="width: 45%; height: 94.5%; float: left;;">
+        <svg id="mainSvg" style="width: 25%; height: 94.5%; float: left;;">
             <rect x="10" y="10" style="width: 30px; height: 5px; " @click="slugRect"></rect>
             <rect x="390" y="10" style="width: 30px; height: 5px; fill: blueviolet;" @click="drown"></rect>
             <rect x="850" y="10" style="width: 30px; height: 5px; fill: rgb(169, 34, 202);" @click="mixTrend"></rect>
@@ -18,8 +18,8 @@
             </defs>
             
         </svg>
-        <div id="rhythm-line" style="float: right; width: 55%; height: 100%;">
-
+        <div id="rhythm-line" style="float: left; width: 55%; height: 100%;">
+            <rhythm />
         </div>
         
     </div>
@@ -29,11 +29,11 @@
 import * as d3 from 'd3'
 import { mapState } from "vuex";
 import * as echarts from 'echarts'
-
+import rhythm from './rhythm.vue'
 export default {
     name: 'mainVis',
     components: {
-
+        rhythm
     },
     data() {
         return {

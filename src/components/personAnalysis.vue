@@ -1,11 +1,9 @@
 <template>
-    <br>
-
     <div id="personAnalysisRounder">
         <div class="wall">
             <el-row :gutter="10">
                 <el-col :xl="100">
-                    <div class="grid-content " style="background-color:#8da8c5 ;"></div>
+                    <div class="grid-content head " style="background-color:#8da8c5 ;"></div>
                 </el-col>
             </el-row>
             <div class="wall grid-content interface-body">
@@ -13,11 +11,11 @@
                     <div class="brick optional ">
                         <el-row :gutter="10" class="czjz">
                             <el-col :span="5" :offset="2">
-                                <div class="sign"></div>
+                                <div class="sign">Person</div>
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content czjz">
-                                    <el-select v-model="value" placeholder="person" class="person-select">
+                                    <el-select v-model="value" placeholder="person" class="person-select" size="medium">
                                         <el-option v-for="item in options" :key="item.value" :label="item.label"
                                             :value="item.value">
                                         </el-option>
@@ -27,22 +25,12 @@
                             </el-col>
                         </el-row>
                     </div>
-                    <!-- <div class="brick optional ">
-                        <el-row :gutter="10" class="czjz">
-                            <el-col :span="5" :offset="2">
-                                <div class="sign"></div>
-                            </el-col>
-                            <el-col :span="15">
-                                <div class="person-content">ss</div>
-                            </el-col>
-                        </el-row>
-                    </div> -->
                 </div>
                 <div class="pillar">
                     <div class="brick optional ">
                         <el-row :gutter="10" class="czjz">
                             <el-col :span="5" :offset="2">
-                                <div class="sign"></div>
+                                <div class="sign">Chapter</div>
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content">
@@ -57,7 +45,7 @@
                     <div class="brick optional ">
                         <el-row :gutter="10" class="czjz">
                             <el-col :span="5" :offset="2">
-                                <div class="sign"></div>
+                                <div class="sign">Place</div>
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content">
@@ -87,7 +75,7 @@
                                 <button class="submit add czjz">add</button>
                             </el-col>
                             <el-col :span="8">
-                                <button class="submit show czjz">submit-show</button></el-col>
+                                <button class="submit show czjz">submit</button></el-col>
                         </el-row>
                     </div>
                 </div>
@@ -156,20 +144,23 @@ export default {
     /* 居中 */
     margin: auto;
 
-    width: 400px;
-    height: 1600px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     border: solid skyblue 2px;
     padding: 1px;
     gap: 0px;
 }
+.head{
+    height: 75px;
+}
 
 .wall {
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: dashed rgb(159, 137, 137) 2px;
+    border: solid rgb(159, 137, 137) 1px;
     overflow: hidden;
 }
 

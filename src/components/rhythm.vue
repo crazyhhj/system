@@ -352,7 +352,7 @@ export default {
 }
 .chartContainer {
     width: 100%;
-    height: 400px;
+    height: 600px;
     color: #695d5d;
 }
 .sub_container{
