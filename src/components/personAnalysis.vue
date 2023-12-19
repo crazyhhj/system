@@ -11,12 +11,12 @@
                     <div class="brick optional ">
                         <el-row :gutter="10" class="czjz">
                             <el-col :span="5" :offset="2">
-                                <div class="sign">Person</div>
+                                <div class="sign" @click="deal_actor">Person</div>
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content czjz">
                                     <el-select v-model="value" placeholder="person" class="person-select" size="medium">
-                                        <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                        <el-option v-for="item in personList" :key="item.value" :label="item.label"
                                             :value="item.value">
                                         </el-option>
                                     </el-select>
@@ -105,22 +105,24 @@ export default {
     data() {
         return {
             screen_num: this.$store.state.slugIndexList,
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            }, {
-                value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
-            }],
+            personList: [],
+            // options: [{
+            //     value: '选项1',
+            //     label: '黄金糕'
+            // }, {
+            //     value: '选项2',
+            //     label: '双皮奶'
+            // }, {
+            //     value: '选项3',
+            //     label: '蚵仔煎'
+            // }, {
+            //     value: '选项4',
+            //     label: '龙须面'
+            // }, {
+            //     value: '选项5',
+            //     label: '北京烤鸭'
+            // }],
+            options:[],
             value_screen:[12,17],
 
         }
@@ -129,12 +131,20 @@ export default {
 
     },
     mounted() {
+        // deal_actor()
     },
     watch: {
 
     },
     methods: {
-
+        deal_actor(){
+            this.personList = Object.entries(this.$store.state.actorFre).sort((a,b)=>b[1]-a[1]).map((d,idx)=>{
+                return {
+                    value: idx,
+                    label: d[0]
+                }
+            })
+        }
     },
 }
 </script>

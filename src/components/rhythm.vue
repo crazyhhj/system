@@ -21,7 +21,6 @@ export default {
 
     },
     mounted() {
-        this.moo();
     },
     computed: {
 
@@ -313,6 +312,7 @@ export default {
                 .attr('cy', d => topMargin + (d.head + d.len) * (unitLen))
                 .style('fill', 'gray')
             bridge.raise();
+            this.moo()
         },
         moo(){
             const svg = d3.select("#performance_methods")

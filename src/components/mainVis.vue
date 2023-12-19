@@ -378,7 +378,7 @@ export default {
                 let a  = tmpArray.filter(d=>d)
                 return Array.from(new Set(a.flat()))
             })
-            console.log('MEANS:', plotPerson);
+            // console.log('MEANS:', plotPerson);
             let personSet = plotPerson.flat()
             function personSort(personArray) {
                 let perFre={};
@@ -396,7 +396,7 @@ export default {
                 return sorted
             }
             let personOrder = personSort(personSet);
-            console.log("MEANS:", personOrder);
+            // console.log("MEANS:", personOrder);
             const personScale_top_three = d3.scaleOrdinal().domain(personOrder.slice(0,3)).range([systemColor.beacon, systemColor.mainDark, systemColor.mian])
             
             function getCordianry(personplot) {
@@ -404,9 +404,9 @@ export default {
                 let cor = personplot.map((d,x)=>{
                     let data = d.map((c,y)=>{
                         let source_x = x%2==0?250:450,
-                        source_y = 100 + x*90 - 13*y,
+                        source_y = 0 + x*90 - 13*y,
                         target_x = x%2==0?250+50+y*13:250+100+y*13,
-                        target_y = 100 + x*90 + 50;
+                        target_y = 0 + x*90 + 50;
 
                         let tmp = {}
                         tmp[`${c}`] = {}
@@ -445,7 +445,7 @@ export default {
                 .data(plotPerson)
                 .join('g')
                     .attr('class', 'personGroup')
-                    .attr('transform', (d,r)=>`translate(${r%2==0?250:300},${100 + r*door_padding + 50})`)
+                    .attr('transform', (d,r)=>`translate(${r%2==0?250:300},${0 + r*door_padding + 50})`)
 
             personGroup.append('rect')
             .attr('x', -8+50)
@@ -471,7 +471,7 @@ export default {
                     .style('fill', 'gray')
 
             let personXY = getCordianry(plotPerson)
-            console.log('print drown pic data',personXY)
+            // console.log('print drown pic data',personXY)
             // personXY = personXY.map(d=>{
             //     d.map(l=>{
             //         console.log(Object.entries(l))
