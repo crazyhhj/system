@@ -6,6 +6,7 @@
             <div class="chartContainer" id="chainChart" style="height:200px;"></div>
         </div>
         <div class="sub_container" id="performance_methods" style="width: 300px;"></div>
+        <div id="charrr"></div>
     </div>
 </template>
 
@@ -245,6 +246,7 @@ export default {
             doChart(data)
             option && myChart.setOption(option);
             this.showChain()
+            this.mixTrend()
 
         },
         showChain() {
@@ -337,8 +339,228 @@ export default {
                 .attr('y', (d,r)=>193+r*190)
                 .text('指导意见')
                 .style('font-size', '20px')
-        }
+        },
 
+        mixTrend() {
+            const _self = this;
+            const vaildEvent = this.$store.state.event_type;
+            console.log('事件类型', vaildEvent);
+            const sluglinesMeta = this.$store.state.sluglinesMeta;
+            // let initList = this.initList;
+            let initList = [[10,30]];
+            console.log(initList);
+            let vaildList = []
+            let timeList = []
+            let mixList = []
+            
+            initList.forEach(element => {
+                let tmp = [];
+                let temp = [];
+                let add = 0;
+                element.forEach(slug => {
+                    tmp.push(vaildEvent[slug])
+                    let len = vaildEvent[slug].length
+                    temp.push({'time':sluglinesMeta[slug]['time'], 'len':vaildEvent[slug].length, 'pos':add})
+                    add = add + len;
+                });
+                vaildList.push(tmp)
+                timeList.push(tmp)
+                
+                mixList.push({'context':tmp, 'time':temp})
+            });
+            console.log(vaildList);
+            console.log(timeList);
+            console.log(mixList);
+
+            
+
+            //draw line and time bloak
+            //#eaeaea #c0c0c0 #808080 #404040
+            let timeArray = ['EARLY MORNING','MORNING', 'DAY', 'AFTERNOON', 'NEXT AFTERNOON', 
+                            'LATE AFTERNOON', 'MAGIC HOUR','DUSK', 'EVENING', 'NIGHT', 'LATE NIGHT', 'LATER', 'SECONDS LATER', '']
+            let colorTimeArray = ['#eaeaea','#eaeaea', '#eaeaea', '#c0c0c0', '#c0c0c0', 
+                            '#c0c0c0', '#c0c0c0','#808080', '#808080', '#404040', '#404040', '#404040', '#404040', '#eaeaea']
+            const timeColorScale = d3.scaleOrdinal().domain(timeArray).range(colorTimeArray)
+            const yScale = d3.scaleLinear().domain([0,370]).range([0,-80])
+
+            let door_width = 70,
+                door_height = 230,
+                dot_in_door_radius = 10,
+                door_padding = 90;
+
+            const svg = d3.select('#charrr')
+
+            const trendGroup = svg.selectAll('g .trendGroup')
+                                    .data(mixList)
+                                    .join('g')
+                                    .attr('class', 'trendGroup')
+                                    .attr('transform', (d,r)=>`translate(550, ${r*door_padding + 110})`)
+            trendGroup
+                .selectAll('rect .timeRect')
+                .data(d=>d.time)
+                    .join('rect')
+                    .attr('class', 'timeRect')
+                    .attr('x', d=>d.pos* 7)
+                    .attr('y', 40)
+                    .attr('width', d=>7*d.len)
+                    .attr('height', 10)
+                    .style('fill', d=>timeColorScale(d.time))
+                    .style('stroke', 'white')
+                    .style('stroke-width', .5)
+                    .on('mouseover', function(event){
+                        let t = d3.select(this).data()
+                        let t1 = t[0]['time']
+                        // let xy = d3.pointer(event);
+                        let xy = [event.pageX- 290, event.pageY-190]
+                        // console.log(event.pageX, event.pageY, xy);
+                        // svg
+                        //     .append('rect')
+                        //     .attr('id', 'context')
+                        //     .attr('x',xy[0])
+                        //     .attr('y',xy[1])
+                        //     .attr('width',100)
+                        //     .attr('height',100)
+                        //     .style('fill','none')
+                        //     .style('stroke-width', 3)
+                        //     .style('opacity',.3)
+                        svg
+                            .append('text')
+                            .attr('id', 'context')
+                            .attr('x',xy[0])
+                            .attr('y',xy[1]+10)
+                            .style('font-size', '13')
+                            .text(`${t1}`)
+                        
+                    })
+                    .on('mouseout',function () {
+                        svg.selectAll('#context').remove()
+                    })
+            
+            trendGroup
+                    .append('line')
+                    .attr('x1', 0)
+                    .attr('x2', 600)
+                    .attr('y1', 0)
+                    .attr('y2', 0)
+                    .style('stroke', 'white')
+                    .style('stroke-width', 1)
+            const line = d3.line()
+                        .x((d,r)=>r*7)
+                        .y(d=>yScale(d['sentence'].length))
+                    
+            vaildList = vaildList.map(d=>{
+                return d.flat()
+            })
+            console.log(d3.extent(vaildList.flat().map(d=>d['sentence'].length))); 
+
+
+
+
+            const trendLine = svg.append('g').attr('class', 'trendLineG')
+            const personDes = trendLine.selectAll('g .personDescribe')
+                                        .data(vaildList)
+                                        .join('g')
+                                        .attr('class', 'personDescribe')
+                                        .attr('transform', (d,r)=>`translate(550, ${r*door_padding + 150})`)
+            personDes
+                    .selectAll('rect .perDe')
+                    .data(d=>d)
+                    .join('rect')
+                        .attr('class', 'perDe')
+                        .attr('x',(d,r)=>r*7)
+                        .attr('y',-30)
+                        .attr('width',d=>{
+                            console.log(d);
+                            return 2
+                        })
+                        .attr('height',15)
+                        .style('fill', d=>{
+                            if(d['type'] == 'character description'){
+                                return 'red'
+                            }
+                            else if(d['type'] == 'action interaction'){
+                                return '#af9ece'
+                            }
+                            else{
+                                return 'none'
+                            }
+                        })
+
+
+
+
+            trendLine.selectAll('path .trendLine')
+                .data(vaildList)
+                .join('path')
+                .attr('class', 'trendLine')
+                .attr('d',line.curve(d3.curveBasis))
+                .attr('transform', (d,r)=>`translate(550, ${r*door_padding + 150})`)
+                .style('fill', 'none')
+                .style('stroke', '#4e79a7')
+                .style('stroke-width', 3)
+
+            trendLine.selectAll('line .li')
+                .data(vaildList)
+                .join('line')
+                .attr('class', 'li')
+                .attr('x1', 0)
+                    .attr('x2', 600)
+                    .attr('y1', 0)
+                    .attr('y2', 0)
+                    .style('stroke', '#4e79a7')
+                    .style('stroke-width', 1)
+                .attr('transform', (d,r)=>`translate(550, ${r*door_padding + 150})`)
+            
+            const yAxis = d3.axisLeft(yScale)
+
+            var defs = svg.append("defs");
+var filter = defs.append("filter")
+    .attr("id", "drop-shadow")
+    .attr("height", "130%");
+filter.append("feGaussianBlur")
+    .attr("in", "SourceAlpha")
+    .attr("stdDeviation", 2)
+    .attr("result", "blur");
+filter.append("feOffset")
+    .attr("in", "blur")
+    .attr("dx", 2)
+    .attr("dy", 2)
+    .attr("result", "offsetBlur");
+
+var feMerge = filter.append("feMerge");
+feMerge.append("feMergeNode").attr("in", "offsetBlur");
+feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
+
+            trendLine.selectAll('line .yAxis')
+                    .data(vaildList)
+                        .join('line')
+                        .attr('x0', 0)
+                        .attr('x1', 0)
+                        .attr('y0', 0)
+                        .attr('y1', -75)
+                        .attr("transform", (d,r)=>`translate(550, ${r*door_padding + 150})`)
+                        .style('fill', 'none')
+                        .style('stroke', '#4e79a7')
+                        .style('stroke-width', 1)
+                        // .style("filter", "url(#drop-shadow)")
+                        
+            // const trendLineRect = svg.selectAll('g .lineRect')
+            //         .data(vaildList)
+            //             .join('g')
+            //             .attr("transform", (d,r)=>`translate(550, ${(r+1)*door_padding + 100})`)
+            //             .call(yAxis);
+            
+            
+
+            
+
+            
+
+
+
+
+        },
     }
 }
 </script>

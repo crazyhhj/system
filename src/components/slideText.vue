@@ -68,7 +68,6 @@ export default {
         },
         sendMessage(index, content) {
             this.eventBus.emit("click-send-slugIndex", index);
-
             //index list 
             
             console.log(index);

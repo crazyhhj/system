@@ -92,16 +92,23 @@
         <div class="wall" style="height: 15%;">
             <div class="person-info"></div>
         </div>
-        <div class="wall" style="height: 20%;">生平介绍</div>
+        <div class="wall" style="height: 20%;">生平介绍
+            <div style=" height: 90%; width: 90%;" class="sluglines">
+                {{ this.lifeList[0] }}
+            </div>
+        </div>
         <div class="wall" style="height: 20%;">关系/社群视图</div>
-        <div class="wall" style="height: 20%;">剧中信息热图</div>
+        <div class="wall" style="height: 20%;">
+        <redaPic/></div>
     </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
-
+import redaPic from './redaPic.vue'
 export default {
+    components: {
+    redaPic},
     data() {
         return {
             screen_num: this.$store.state.slugIndexList,
@@ -124,6 +131,7 @@ export default {
             // }],
             options:[],
             value_screen:[12,17],
+            lifeList:[],
 
         }
     },
@@ -144,6 +152,8 @@ export default {
                     label: d[0]
                 }
             })
+            let str = `Arthur is a struggling clown performer living in the impoverished and crime-ridden Gotham City. He faces numerous challenges and hardships, which eventually push him towards madness and a life of crime. The movie delves into Arthur's descent into darkness and his transformation into the iconic supervillain, becoming a symbol of chaos and rebellion in Gotham City. "Joker" received critical acclaim for its gripping storyline and Joaquin Phoenix's outstanding portrayal of Arthur Fleck.`;
+            this.lifeList = [str];
         }
     },
 }
@@ -322,5 +332,15 @@ export default {
         line-height: 10px;
     }
 }
-
+.sluglines{
+    display: inline-block;
+    /* line-height: 24px;
+    padding: 5px 0;
+    
+    margin-right: 10px; */
+    
+    word-wrap: break-word;
+    /* word-break: break-all; */
+    overflow: hidden; 
+}
 </style>

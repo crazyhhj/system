@@ -1,5 +1,5 @@
 <template>
-    <div id="actorEmoArea">
+    <div id="actorEmoArea" style="transform: rotate(-50,-50); rotate: (.5);" >
     </div>
     <!-- <button @click="drawRedaChart">获得雷达图</button> -->
     <!-- <button @click="showD">显示数据</button> -->
@@ -255,6 +255,9 @@ export default {
                 .style("fill", (d, r) => colorScale(r))
                 .text(d => d)
 
+            
+            d3.select('svg').attr('transform', "scale(0.5)")
+            d3.select('svg').attr('transform', "rotate(-100,-200)")
 
         },
         showD() {

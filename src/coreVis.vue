@@ -75,7 +75,7 @@
         <relationAct />
       </div>
     </div>
-
+    <slideText/>
     <div v-if="false">
       <actorEmo />
 
