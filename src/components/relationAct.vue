@@ -4,7 +4,7 @@
         <h1>{{ this.screen_num }}</h1> -->
         <!-- <button @click="getLinks">①请先获得人物关系数据</button> -->
         <!-- <button @click="drawRelation">456789</button> -->
-        <div id="relationArea" ></div>
+        <div id="relationArea"  style="width: 100%; height: 100%;"></div>
         <!-- <div id="operatingFloor">
             <div id="progress-control">
                 
@@ -257,7 +257,8 @@ export default {
             const data0 = nodeLink.map(d => ({nodes: Array.from(new Set(d.flatMap(l => [l.source, l.target])),id=>({id})), links:d}))
             const data = data0[index]
             // console.log(rData);
-            const uniformVariableValue = 400
+            // const uniformVariableValue = 400
+            const uniformVariableValue = '100%';
             
             const height = uniformVariableValue,width = uniformVariableValue;
             const types = Array.from(new Set(data.nodes.map(d=>d.id)))
@@ -451,8 +452,8 @@ export default {
 
 <style>
 .slugRelation {
-    width: 500px;
-    height: 550px;
+    width: 100%;
+    height: 100%;
 }
 /* .slugRelation {
     width: 1000px;

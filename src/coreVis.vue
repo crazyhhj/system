@@ -85,6 +85,13 @@
       <pracitePic />
     </div>
 
+    <div style="width: 200px; height: 200px; " id="emememe">
+      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
+      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
+      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
+      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
+    </div>
+
     <div>
      
     </div>
@@ -140,7 +147,7 @@ export default {
 
       slugInfromation: '',
       index:0,
-
+      dialogVisible: false,
     }
   },
   mounted() {
@@ -359,6 +366,7 @@ div {
   border: 1px solid #ccc;
   box-shadow: 0px 0px 5px #ccc;
 }
+
 </style>
 
 

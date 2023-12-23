@@ -3,7 +3,8 @@
   <img alt="Vue logo" src="./assets/logo.png"> -->
   <div id="universe">
     <coreVis/>
-  </div>
+    </div>
+
 </template>
 
 <script>
@@ -15,7 +16,11 @@ export default {
   name: 'App',
   components: {
     coreVis,
-  }
+  },
+  data(){
+    return{
+    }
+  },
 }
 </script>
 

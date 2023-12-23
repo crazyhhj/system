@@ -69,7 +69,6 @@ export default {
         sendMessage(index, content) {
             this.eventBus.emit("click-send-slugIndex", index);
             //index list 
-            
             console.log(index);
             this.$store.commit('sendIndexToRelation',index);
             this.$store.commit('sendContent',content);

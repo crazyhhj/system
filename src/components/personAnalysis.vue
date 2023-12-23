@@ -11,13 +11,14 @@
                     <div class="brick optional ">
                         <el-row :gutter="10" class="czjz">
                             <el-col :span="5" :offset="2">
-                                <div class="sign" @click="deal_actor">Person</div>
+                                <div class="sign">Person</div>
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content czjz">
-                                    <el-select v-model="value" placeholder="person" class="person-select" size="medium">
+                                    <el-select v-model="roleName" placeholder="person" class="person-select" size="medium" >
                                         <el-option v-for="item in personList" :key="item.value" :label="item.label"
-                                            :value="item.value">
+                                            :value="item.value" @click="showRole(item.value)">
+                                            {{ item.label }}
                                         </el-option>
                                     </el-select>
 
@@ -49,7 +50,7 @@
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content">
-                                    <el-select v-model="value" placeholder="place" class="person-select">
+                                    <el-select v-model="place" placeholder="place" class="person-select">
                                         <el-option v-for="item in options" :key="item.value" :label="item.label"
                                             :value="item.value">
                                         </el-option>
@@ -72,10 +73,10 @@
                     <div class="brick optional ">
                         <el-row :gutter="40" class="czjz">
                             <el-col :span="6" :offset="8">
-                                <button class="submit add czjz">add</button>
+                                <button class="submit add czjz" @click="deal_actor">add</button>
                             </el-col>
                             <el-col :span="8">
-                                <button class="submit show czjz">submit</button></el-col>
+                                <button class="submit show czjz" @click="submit">submit</button></el-col>
                         </el-row>
                     </div>
                 </div>
@@ -83,56 +84,83 @@
         </div>
         <div class="wall">
             <el-row :gutter="0" class="czjz">
-                            <el-col :span="19" :offset="0">
-                                <div class="candidate"></div>
-                            </el-col>
-                            <el-col :span="5" >
-                            <div class="checkPerson"></div></el-col></el-row>
+                <el-col :span="19" :offset="0">
+                    <div class="candidate"></div>
+                </el-col>
+                <el-col :span="5">
+                    <div class="checkPerson"></div>
+                </el-col></el-row>
         </div>
         <div class="wall" style="height: 15%;">
-            <div class="person-info"></div>
-        </div>
-        <div class="wall" style="height: 20%;">生平介绍
-            <div style=" height: 90%; width: 90%;" class="sluglines">
-                {{ this.lifeList[0] }}
+            <div class="person-info">
+                <el-button @click="dialogVisible = true">点击查看缩略☯️</el-button>
+
+                <el-dialog v-model="dialogVisible" title="章节人物分布预览图" width="70%" height="70%" :before-close="handleClose">
+                    <distribute/>
+                    <template #footer>
+                        <span class="dialog-footer">
+                            <el-button @click="dialogVisible = false">Cancel</el-button>
+                            <el-button type="primary" @click="dialogVisible = false">
+                                Confirm
+                            </el-button>
+                        </span>
+                    </template>
+                </el-dialog>
             </div>
         </div>
-        <div class="wall" style="height: 20%;">关系/社群视图</div>
-        <div class="wall" style="height: 20%;">
-        <redaPic/></div>
+        <div class="wall" style="height: 20%;"  >生平介绍
+            <div style=" height: 100%; width: 100%;" id="emememe">
+                {{ this.lifeList[this.roleName] }}
+            </div>
+        </div>
+        <div class="wall" style="height: 20%;">关系/社群视图
+            <div style="width: 100%; height: 100%;">
+                <RelationAct />
+            </div>
+        </div>
+        <div class="wall" style="height: 20%;">人物情感雷达图
+            <redaPic />
+        </div>
     </div>
 </template>
 
 <script>
 import * as d3 from 'd3'
 import redaPic from './redaPic.vue'
+import RelationAct from './relationAct.vue'
+import distribute from './distribute.vue'
 export default {
     components: {
-    redaPic},
+        redaPic,
+        RelationAct,
+        distribute,
+    },
     data() {
         return {
             screen_num: this.$store.state.slugIndexList,
             personList: [],
-            // options: [{
-            //     value: '选项1',
-            //     label: '黄金糕'
-            // }, {
-            //     value: '选项2',
-            //     label: '双皮奶'
-            // }, {
-            //     value: '选项3',
-            //     label: '蚵仔煎'
-            // }, {
-            //     value: '选项4',
-            //     label: '龙须面'
-            // }, {
-            //     value: '选项5',
-            //     label: '北京烤鸭'
-            // }],
-            options:[],
-            value_screen:[12,17],
-            lifeList:[],
-
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            }, {
+                value: '选项2',
+                label: '双皮奶'
+            }, {
+                value: '选项3',
+                label: '蚵仔煎'
+            }, {
+                value: '选项4',
+                label: '龙须面'
+            }, {
+                value: '选项5',
+                label: '北京烤鸭'
+            }],
+            // options:[],
+            value_screen: [0, 0],
+            lifeList: [],
+            roleName: '',
+            place: '',
+            dialogVisible: false,
         }
     },
     computed() {
@@ -145,16 +173,35 @@ export default {
 
     },
     methods: {
-        deal_actor(){
-            this.personList = Object.entries(this.$store.state.actorFre).sort((a,b)=>b[1]-a[1]).map((d,idx)=>{
+        deal_actor() {
+            this.personList = Object.entries(this.$store.state.actorFre).sort((a, b) => b[1] - a[1]).map((d, idx) => {
                 return {
                     value: idx,
                     label: d[0]
                 }
             })
-            let str = `Arthur is a struggling clown performer living in the impoverished and crime-ridden Gotham City. He faces numerous challenges and hardships, which eventually push him towards madness and a life of crime. The movie delves into Arthur's descent into darkness and his transformation into the iconic supervillain, becoming a symbol of chaos and rebellion in Gotham City. "Joker" received critical acclaim for its gripping storyline and Joaquin Phoenix's outstanding portrayal of Arthur Fleck.`;
-            this.lifeList = [str];
-        }
+            let str = [
+                `Arthur Fleck:\n The main character portrayed by Joaquin Phoenix. Arthur is a struggling comedian living in a poverty-stricken neighborhood of Gotham City. He faces a series of hardships and injustices from society, which eventually leads him to transform into the Joker.`,
+                `Sophie:\n Sophie is a single mother and a neighbor of Arthur Fleck. She is portrayed by Zazie Beetz. Sophie forms a connection with Arthur and their relationship develops throughout the film.`,
+                `Mom (Debbie): \n Arthur Fleck's mother, portrayed by Frances Conroy. Debbie is Arthur's only family member, but their relationship is not very close. She plays a significant role in Arthur's backstory and his mental state.`,
+                `Murray Franklin: \n Murray Franklin is a popular late-night talk show host in Gotham City. He is portrayed by Robert De Niro. Arthur idolizes Murray and dreams of appearing on his show, which becomes a significant turning point in the story.`,
+                `Randall: \n Randall is a co-worker of Arthur at the clown agency. He is portrayed by Glenn Fleshler. Randall plays a minor role, but he becomes a target of Arthur's anger and frustration.`,
+                `Social Worker: \n The social worker is a character who is responsible for Arthur's mental health and therapy sessions. She is portrayed by Sharon Washington. The social worker tries to help Arthur, but he becomes disillusioned with the system and stops attending the sessions.`,
+                `Social Worker: \n The social worker is a character who is responsible for Arthur's mental health and therapy sessions. She is portrayed by Sharon Washington. The social worker tries to help Arthur, but he becomes disillusioned with the system and stops attending the sessions.`,
+                `Thomas Wayne: \n Thomas Wayne is a wealthy businessman and philanthropist in Gotham City. He is portrayed by Brett Cullen. In the movie, Thomas Wayne plays a role in Arthur's life and has a connection to his past.`,
+            ]
+            this.lifeList = [...str];
+        },
+        showRole(value) {
+            console.log(value);
+        },
+        submit() {
+            let roleName = this.personList[this.roleName].label;
+            let index = this.value_screen[0]
+            this.eventBus.emit("click-send-slugIndex", index);
+            this.$store.commit('sendIndexToRelation', index);
+            console.log(roleName, this.value_screen);
+        },
     },
 }
 </script>
@@ -172,7 +219,8 @@ export default {
     padding: 1px;
     gap: 0px;
 }
-.head{
+
+.head {
     height: 75px;
 }
 
@@ -184,7 +232,7 @@ export default {
     overflow: hidden;
 }
 
-.person-info{
+.person-info {
     /* border: solid black 3px; */
     width: 100%;
     height: 100%;
@@ -242,19 +290,22 @@ export default {
     height: 18px;
     border-radius: 4px;
 }
-.candidate{
+
+.candidate {
     background: #e9e9e9;
     height: 35px;
     border-radius: 9px;
     border: solid black 3px;
 
 }
-.checkPerson{
+
+.checkPerson {
     background: #e9e9e9;
     height: 35px;
     border-radius: 9px;
     border: solid black 3px;
 }
+
 .person-content {
     background: #e9e9e9;
     height: 22px;
@@ -332,15 +383,16 @@ export default {
         line-height: 10px;
     }
 }
-.sluglines{
-    display: inline-block;
-    /* line-height: 24px;
-    padding: 5px 0;
-    
-    margin-right: 10px; */
-    
-    word-wrap: break-word;
-    /* word-break: break-all; */
-    overflow: hidden; 
+
+#emememe{
+  white-space: pre-wrap;
+    text-align: center;
+    overflow-y: scroll;
+    display: block;
+    font-size: 14pt;
+    padding: 10px;
+}
+:deep(.el-dialog) {
+    height: 70%;
 }
 </style>

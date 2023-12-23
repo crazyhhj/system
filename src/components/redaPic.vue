@@ -1,5 +1,5 @@
 <template>
-    <div id="actorEmoArea" style="transform: rotate(-50,-50); rotate: (.5);" >
+    <div id="actorEmoArea" style=" width: 100%; height: 100%;" >
     </div>
     <!-- <button @click="drawRedaChart">获得雷达图</button> -->
     <!-- <button @click="showD">显示数据</button> -->
@@ -88,8 +88,11 @@ export default {
             console.log(actor, emo, maxValue);
             //↑↑↑↑↑↑↑↑data↑↑↑↑↑↑↑↑
 
-            const width = 700, height = 700;
-            const redaSize = 200;
+            const measure = '100%';
+            // const width = 700, height = 700;
+            const width = measure, height = measure;
+            const redaSize = 120;
+            // const redaSize = 80;
 
 
             // let data = [13,2,4,17,20,1];
@@ -130,7 +133,7 @@ export default {
                 .attr("height", height)
             const group = svg.append("g")
                 .attr("id", "redaManager")
-                .attr("transform", "translate(250,250)")
+                .attr("transform", "translate(150,130)")
             const line = d3.line()
                 .x(d => xScale(d.x))
                 .y(d => yScale(d.y))
@@ -235,12 +238,13 @@ export default {
                 .style("fill", "blue")
 
             //图例
+            const legendHeight = 200;
             actorGroup.selectAll(".label")
                 .data(actor)
                 .join("text")
                 .attr("class", "label")
-                .attr("x", 2 / 10 * height)
-                .attr("y", (d, r) => 2 / 6 * height + r * 30)
+                .attr("x", -1/2 * legendHeight)
+                .attr("y", (d, r) => 11 / 18 * legendHeight + r * 15)
                 .style("fill", 'black')
                 .text(d => d)
 
@@ -248,8 +252,8 @@ export default {
                 .data(actor)
                 .join("rect")
                 .attr("class", "icon")
-                .attr("x", 2 / 10 * height - 10)
-                .attr("y", (d, r) => 2 / 6 * height + r * 30 - 10)
+                .attr("x", -1/2 * legendHeight - 10)
+                .attr("y", (d, r) => 11 / 18 * legendHeight + r * 15 - 10)
                 .attr("width", 10)
                 .attr("height", 10)
                 .style("fill", (d, r) => colorScale(r))

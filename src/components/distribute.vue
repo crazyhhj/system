@@ -3,7 +3,6 @@
         <!-- <p>slideText 说了 {{ msg }}</p> -->
         <!-- <div id="rangeMapping"></div> -->
     <div class="tab" id="ring" style="width: 100%; height: 100%;">
-        <div class="main_title" style="height: 80px;"></div>
         <!-- <button @click="getInfo" style="display:flex ;">get actor information</button> -->
         <button @click="drawRing" style="display:flex ;">⚪⚪⚪⚪⚪⚪</button>
     </div>
@@ -248,7 +247,8 @@ export default {
                     midGroup.push({'border':groupdata[i].trans_index, 'mid':mid})
                 }
 
-                let scale = .38
+                // let scale = .38
+                let scale = .6
 
                 const width = 2000*scale, height = 2000*scale;
                 const chapter_loop_radius = .865*width/2,
@@ -262,7 +262,7 @@ export default {
                     patch_circle_radius = .01*width/2;
                 
                 console.log(group_Sum);
-                const svg = d3.select('#ring').append('svg').attr('viewbox', '0 0 2000 2000').attr('width', width).attr('height',height).attr('transform','translate(-50,-70)')
+                const svg = d3.select('#ring').append('svg').attr('viewbox', '0 0 2000 2000').attr('width', width).attr('height',height).attr('transform','translate(-0,0)')
                 
                 const main_g = svg.append('g').append('g').attr('transform', `translate(${width/2},${height/2})`).attr('class', 'main_g')
                 svg.append('defs')
@@ -502,7 +502,7 @@ export default {
                     .selectAll('.test')
                     .data(actor10)
                     .join('circle')
-                        .attr('r',5*scale)
+                        .attr('r',10*scale)
                         .attr('cx',0)
                         .attr('cy',d=>{
                             actor_hover_dot[d.name] = actor_arc_outerRadius + Math.sqrt(1000*d.name.length)
@@ -521,9 +521,9 @@ export default {
                         .on('mouseenter', function(){
                             tes(d3.select(this).attr('class'), (d3.select(this).attr('transform')), d3.select(this).attr('cy'));
                         })
-                        // .on('mouseout', function(){
-                        //     d3.selectAll(`.line-${d3.select(this).attr('class')}`).remove()
-                        // })
+                        .on('mouseout', function(){
+                            d3.selectAll(`.line-${d3.select(this).attr('class')}`).remove()
+                        })
                 
                 
                 // ===========================
@@ -615,7 +615,8 @@ export default {
                             .attr('d', d=>create_actor_chapter_lines(d, one_actor_Angle, all_chapterAngle[d].angle, cy, chapter_loop_radius))
                             .attr('class', `line-${name}`)
                             .attr('fill', 'none')
-                            .attr('stroke-width', 7*scale)
+                            // .attr('stroke-width', 7*scale)
+                            .attr('stroke-width', 4*scale)
                             .attr('stroke', `${colorScale(name.replace(/(\W)/g,'-'))}`)
 
 
@@ -624,15 +625,15 @@ export default {
                 // =======================================
                 // ============chapter hover link=========
                 // =======================================
-                link_group
-                    .selectAll('.sasd')
-                    .data(all_chapterAngle)
-                    .join('circle')
-                        .attr('cx', 0)
-                        .attr('cy', d=>400 + d.angle/360 * 250) 
-                        .attr('r', 5*scale)
-                        .attr('opacity',.3)
-                        .attr('transform', d=>`rotate(${d.angle})`)  
+                // link_group
+                //     .selectAll('.sasd')
+                //     .data(all_chapterAngle)
+                //     .join('circle')
+                //         .attr('cx', 0)
+                //         .attr('cy', d=>400 + d.angle/360 * 250) 
+                //         .attr('r', 5*scale)
+                //         .attr('opacity',.3)
+                //         .attr('transform', d=>`rotate(${d.angle})`)  
 
                 function line_chapter_actor(one_chapter_all_actor_group, id){
                     // console.log(one_chapter_all_actor_group.map(d=>actor_angle_group[d]));
