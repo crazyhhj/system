@@ -387,10 +387,11 @@ export default {
 #emememe{
   white-space: pre-wrap;
     text-align: center;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     display: block;
     font-size: 14pt;
     padding: 10px;
+    overflow: hidden;
 }
 :deep(.el-dialog) {
     height: 70%;

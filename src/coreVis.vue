@@ -85,13 +85,6 @@
       <pracitePic />
     </div>
 
-    <div style="width: 200px; height: 200px; " id="emememe">
-      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
-      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
-      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
-      dsadaaa斯纳单独撒斯纳减肥少女房间爱动脑筋睡觉啊看怒不耐烦加拿大妇女节的山南海北富含维房间内的淑女风的少年
-    </div>
-
     <div>
      
     </div>
@@ -192,6 +185,7 @@ export default {
       this.$store.commit('getAllTextToGpt');
       this.$store.commit('getEventType');
       this.$store.commit('getGptText');
+      this.$store.commit('getRhythmDetail');
     },
     getSchedulingData() {
       axios.get("http://127.0.0.1:5000/api/post/scheduling")
@@ -304,7 +298,7 @@ body>.el-container {
   background-color: #fff;
   color: #666;
   font-weight: bold;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   transition: background-color 0.2s ease-in-out;
   /* padding: 0% 1% 0% 0%;
   border-bottom: #e42b2b; */

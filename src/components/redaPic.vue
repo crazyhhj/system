@@ -12,6 +12,7 @@ export default {
     data() {
         return {
             screen_num: this.$store.state.slugIndexList,
+           
         }
     },
     computed() {
@@ -22,10 +23,7 @@ export default {
     watch: {
         screen_num: {
             handler: function (screen_num) {
-
                 const index = screen_num[screen_num.length - 1]
-                console.log('啥的');
-                console.log('be watch');
                 this.drawRedaChart(index);
             }, deep: true
         }
