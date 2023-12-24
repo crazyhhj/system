@@ -75,7 +75,7 @@
         <relationAct />
       </div>
     </div>
-    <slideText/>
+    <!-- <slideText/> -->
     <div v-if="false">
       <actorEmo />
 
@@ -206,9 +206,11 @@ export default {
 <style>
 /* 1582 */
 #main-manager {
-  /* width: 2560px; */
-  width: 2880px;
-  height: 1690px;
+  width: 2560px;
+  /* width: 2880px; */
+  /* height: 1690px; */
+  height: 1440px;
+  /* height: 1225px; */
 }
 
 #flat {
@@ -232,8 +234,8 @@ export default {
 
 
 .el-aside {
-  height: 1582px;
-
+  height: 1440px;
+  /* height: 1225px; */
   background-color: #D3DCE6;
   color: #333;
   text-align: center;
@@ -259,7 +261,7 @@ export default {
 
 
 .el-main {
-  height: 1582px;
+  height: 1440px;
 
   background-color: #E9EEF3;
   color: #333;

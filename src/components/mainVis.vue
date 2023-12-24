@@ -9,7 +9,8 @@
             <div class="main_sub_title" style="width: 768px;  border-right:1px dashed black;"><span>PLOT SCORE
                     ANALYSE</span></div>
         </div>
-        <svg id="mainSvg" style="width: 25%; height: 94.5%; float: left;;">
+        <div style="width: 19.5%; height: 94.5%; float: left; box-shadow: 0 4px  8px rgba(0, 0, 0, 0.2); margin: 5px;">
+            <svg id="mainSvg" style="width: 100%; height: 100%; float: left;">
             <rect x="10" y="10" style="width: 30px; height: 5px; " @click="slugRect"></rect>
             <rect x="390" y="10" style="width: 30px; height: 5px; fill: blueviolet;" @click="drown"></rect>
             <rect x="850" y="10" style="width: 30px; height: 5px; fill: rgb(169, 34, 202);" @click="mixTrend"></rect>
@@ -18,8 +19,14 @@
                 <polygon id="detail" points="0,0 7.5,5 0,10" transform="scale(1)"></polygon>
             </defs>
 
-        </svg>
-        <div id="rhythm-line" style="float: left; width: 55%; height: 100%;">
+            </svg>
+        </div>
+       
+        <div id="rhythm-line" style="float: left; width: 79.5%; height: 94.5%; box-shadow: 0 0px  8px rgba(0, 0, 0, 0.2); 
+        margin-bottom: 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+        ">
             <rhythm />
         </div>
     </div>
@@ -583,7 +590,7 @@ export default {
                 .style("stroke-width", .5)
                 .style("stroke-dasharray", "5,5");
 
-            this.mixTrend()
+            // this.mixTrend()
         },
         drawMixLine(slugList) {
             slugList
@@ -622,9 +629,9 @@ export default {
 
                 mixList.push({ 'context': tmp, 'time': temp })
             });
-            console.log(vaildList);
-            console.log(timeList);
-            console.log(mixList);
+            // console.log(vaildList);
+            // console.log(timeList);
+            // console.log(mixList);
 
 
 
