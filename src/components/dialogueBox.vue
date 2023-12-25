@@ -1,6 +1,6 @@
 <template>
     <div id="dialogueBoxMain">
-        <div class="main_title" style="width: 508px; height: 80px; position: absolute; top: 104px;left:2370px"></div>
+        <!-- <div class="main_title" style="width: 508px; height: 80px; position: absolute; top: 104px;left:2370px"></div> -->
         <div class="mian_title" style="height: 80px;"></div>
         <!-- <button @click="dialogueBox" st>dialogue</button> -->
         <div id="dialogueBox" style="overflow: scroll; width: 450px; height: 780px; background-color: transparent;"></div>

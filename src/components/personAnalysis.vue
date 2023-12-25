@@ -91,10 +91,9 @@
                     <div class="checkPerson"></div>
                 </el-col></el-row>
         </div>
-        <div class="wall" style="height: 15%;">
-            <div class="person-info">
+        <div class="wall" style="height: 5%;">
+            <div class="person-info perTab">
                 <el-button @click="dialogVisible = true">点击查看缩略☯️</el-button>
-
                 <el-dialog v-model="dialogVisible" title="章节人物分布预览图" width="70%" height="70%" :before-close="handleClose">
                     <distribute/>
                     <template #footer>
@@ -108,18 +107,30 @@
                 </el-dialog>
             </div>
         </div>
-        <div class="wall" style="height: 20%;"  >生平介绍
-            <div style=" height: 100%; width: 100%;" id="emememe">
+        <div class="wall" style="height: 20%;"  >
+            <div id="emememe" class="perTab">
+                生平介绍 <br/>
                 {{ this.lifeList[this.roleName] }}
             </div>
         </div>
-        <div class="wall" style="height: 20%;">关系/社群视图
-            <div style="width: 100%; height: 100%;">
+        <div class="wall " style="height: 25%;">
+            <div class = "perTab">
+                关系/社群视图
                 <RelationAct />
             </div>
         </div>
-        <div class="wall" style="height: 20%;">人物情感雷达图
-            <redaPic />
+        <div class="wall" style="height: 25%;">
+            <div class = "perTab">
+                人物情感雷达图
+                <redaPic />
+            </div>
+        </div>
+        <div class="wall" style="height: 8%;">
+            <div class = "perTab copyright">
+                CopyRight 
+                <br/>
+                2023 @HeHongJie
+            </div>
         </div>
     </div>
 </template>
@@ -228,7 +239,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    border: solid rgb(159, 137, 137) 1px;
+    /* border: solid rgb(159, 137, 137) 1px; */
     overflow: hidden;
 }
 
@@ -292,18 +303,19 @@ export default {
 }
 
 .candidate {
-    background: #e9e9e9;
+    /* background: #e9e9e9; */
+    background: #82b6d0;
     height: 35px;
     border-radius: 9px;
-    border: solid black 3px;
+    /* border: solid black 3px; */
 
 }
 
 .checkPerson {
-    background: #e9e9e9;
+    /* background: #e9e9e9; */
+    background: #82b6d0;
     height: 35px;
     border-radius: 9px;
-    border: solid black 3px;
 }
 
 .person-content {
@@ -393,6 +405,19 @@ export default {
     padding: 10px;
     overflow: hidden;
 }
+
+.perTab{
+    /* box-shadow:  0 0  8px rgba(0, 0, 0, 0.2); */
+    box-shadow:  0 0  8px rgba(27, 75, 232, 0.826);
+    margin: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+}
+.copyright{
+    text-justify: auto;
+    font-size: 2em;
+}
+
 :deep(.el-dialog) {
     height: 70%;
 }

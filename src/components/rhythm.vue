@@ -525,7 +525,7 @@ export default {
                 .attr('x2', 0)
                 .attr('y1', d => topMargin + d.head * (unitLen))
                 .attr('y2', d => topMargin + (d.head + d.len) * (unitLen))
-                .attr('fill', 'black')
+                .attr('fill', 'black') 
                 .attr('stroke', '#C0C0C0')
                 .attr('stroke-width', '5')
             p2p.append('circle')
@@ -537,6 +537,7 @@ export default {
             this.moo()
         },
         moo() {
+            d3.select("#performance_methods").selectAll("*").remove();
             const svg = d3.select("#performance_methods")
                 .append('svg')
                 .attr('width', '100%')
@@ -787,10 +788,12 @@ export default {
     /* 第一列宽度为9，第二列宽度为1 */
     grid-gap: 10px;
     /* 列之间的间隔 */
-    width: 2000px;
+    /* width: 2000px; */
+    width: 100%;
 }
 
 .chartContainer {
+    /* width: 1500px; */
     width: 100%;
     height: 600px;
     color: #695d5d;
@@ -798,7 +801,7 @@ export default {
 }
 
 .sub_container {
-    border: solid rgb(237, 174, 174);
+    /* border: solid rgb(237, 174, 174); */
     /* color: ; */
 
 }</style>
