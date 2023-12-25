@@ -466,8 +466,8 @@ export default {
             showList.length==0?doChart(quickLookData):doChartTwo(data);
             // doChart(data)
             option && myChart.setOption(option);
-            this.showChain()
-            this.mixTrend()
+            this.showChain();
+            showList.length==0?null:this.mixTrend();
         },
         showChain() {
             d3.select("#chainChart").selectAll("*").remove();
