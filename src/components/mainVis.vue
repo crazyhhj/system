@@ -312,12 +312,21 @@ export default {
             }
             continue_li(index_li)
 
+            for(let i in coun_list){
+                if (coun_list[i][0]==30){
+                    coun_list[i] = [35,36,37,38,39]
+                }
+            }
+
             this.initList = coun_list.map(d => {
                 let limit = d3.extent(d)
                 let n = limit[0],
                     m = limit[1];
+                
                 return Array.from({ length: m - n + 1 }, (_, i) => n + i)
             });
+            this.$store.commit('setinitTrendList', this.initList);
+            console.log('初定义',this.initList, coun_list);
 
             locData.data.map(d => d.map(l => loc_index[`${l}`]++))
             let loc_index_list = [];

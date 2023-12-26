@@ -35,7 +35,7 @@
                             </el-col>
                             <el-col :span="15">
                                 <div class="person-content">
-                                    <el-slider v-model="value_screen" range show-stops :max="127">
+                                    <el-slider v-model="value_screen"  show-stops :max="127">
                                     </el-slider>
                                 </div>
                             </el-col>
@@ -167,7 +167,7 @@ export default {
                 label: '北京烤鸭'
             }],
             // options:[],
-            value_screen: [0, 0],
+            value_screen: 0,
             lifeList: [],
             roleName: '',
             place: '',
@@ -208,7 +208,7 @@ export default {
         },
         submit() {
             let roleName = this.personList[this.roleName].label;
-            let index = this.value_screen[0]
+            let index = this.value_screen
             this.eventBus.emit("click-send-slugIndex", index);
             this.$store.commit('sendIndexToRelation', index);
             console.log(roleName, this.value_screen);

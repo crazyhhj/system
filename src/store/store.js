@@ -5,7 +5,7 @@ import axios from 'axios'
 const store = createStore({
   state: {
     countSlug: 200,
-
+    initTrendList:[],
     slugInfromation: new Array(200).fill({ 'screen': '' }),
     schedulingData: '',
     rhythmDetailData: '',
@@ -89,8 +89,17 @@ const store = createStore({
         tmp.push(index)
       }
       state.slugIndexList = tmp;
-      // console.log(state.slugIndexList);
+      console.log(state.slugIndexList);
     },
+
+    setTrendList(state, indexList){
+      console.log(indexList);
+      state.trendList = indexList;
+    },
+    setinitTrendList(state, indexList){
+      state.initTrendList = indexList;
+    },
+
     getScreenPlay(state) {
       let _self = state;
       axios.get('http://127.0.0.1:5000/api/post/screenplay')
@@ -373,9 +382,7 @@ const store = createStore({
           console.log(error);
         })
     },
-    setTrendList(state, indexList){
-      state.trendList = indexList
-    },
+    
     clearTrendList(state){
       state.trendList = [];
     }

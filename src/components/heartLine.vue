@@ -1,6 +1,6 @@
 <template>
     <div id="heartLine" style="width: 100%; height: 100%;">
-        <button @click="lineH" style="position: absolute; top: 10%;left:70%">dialogue</button>
+        
     </div>
 </template>
 
@@ -10,7 +10,6 @@ export default {
     data() {
         return {
             screen_num: this.$store.state.slugIndexList,
-
         }
     },
     mounted() {
@@ -29,7 +28,7 @@ export default {
     },
     methods: {
         lineH(index) {
-            //    console.log('heartData', heartData);
+            //    console.log('heartData', '??Asd',heartData);
             
             const emoConstrast = [
                 //一般  blue 3

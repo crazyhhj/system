@@ -50,7 +50,8 @@
               </router-view></el-main>
             <el-footer></el-footer> -->
           </el-container>
-          <el-aside style="width: 0px;">
+
+          <!-- <el-aside style="width: 0px;">
             
             <div class="tab-container" style="box-sizing: border-box; width: 100%; height: 50%;  ">
               <div class="tab" style="width: 61%; height: 100%; display: inline-block;">
@@ -68,7 +69,8 @@
                 <redaPic />
               </div>
             </div>
-          </el-aside>
+          </el-aside> -->
+
         </el-container>
       </el-container>
       <div id="flat" style="display: none;">
@@ -81,16 +83,15 @@
 
       <location />
 
-      <!-- <mixLine/> -->
-      <pracitePic />
+      <mixLine/>
+      <pracitePic /> 
     </div>
-
+    {{ trend }}
     <div>
      
     </div>
   </div>
-
-
+  
   <!-- ____---------------____---------------____---------------____---------------____---------------____---------------____--------------- -->
 </template>
   
@@ -141,6 +142,8 @@ export default {
       slugInfromation: '',
       index:0,
       dialogVisible: false,
+      trend: this.$store.state.trendList,
+
     }
   },
   mounted() {
