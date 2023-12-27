@@ -625,19 +625,19 @@ export default {
             const createExample = (id, tt) => {
                 const svg = d3.select(id)
                     .append('svg')
-                    .attr('width', '300')
+                    .attr('width', '200')
                     .attr('height', '200');
 
                 svg.append('rect')
                     .attr('width', 300)
                     .attr('height', 130)
-                    .attr('x', 40)
+                    .attr('x', 0)
                     .attr('y', 40)
                     .style('fill', '#8da8c5')
                     .style('opacity', 0.3)
 
                 svg.append('text')
-                    .attr('x', 40)
+                    .attr('x', 0)
                     .attr('y', 193)
                     .text('指导意见')
                     .style('font-size', '20px')
@@ -645,13 +645,15 @@ export default {
                     .data(tt)
                     .join('text')
                     .attr('class', 'miaoshu')
-                    .attr('x', 40)
+                    .attr('x', 0)
                     .attr('y', (d,r)=>65 + 20*r)
                     .text(d=>d)
                     .style('font-size', '20px')
+                
+                
             }
-            let t3 = ['表现派', '它强调通过表演、行为','和身体语言来传达信息','和表达意图'];
-            let t1 = [ '体验派', '斯坦尼斯拉夫斯基梳','理的表演的核心' ];
+            let t3 = ['表现派', '它强调通过表演、行为','和身体语言','来传达信息','和表达意图'];
+            let t1 = [ '体验派', '斯坦尼斯拉夫斯基','梳理的表演的核心' ];
             let t2 = ['方法派', '是对“体系”的发展，','是用具体方法解','决其中的问题'];
             createExample("#ty", t1);
             createExample("#ff", t2);
@@ -878,14 +880,14 @@ export default {
         guide(e) {
             const type = e.target.id;
             const that = this;
-            this.perGudType = type
+            this.perGudType = type;
             const { Joker,JokerGuide, ws1, ws2, ws3, young_women } = subwayData;
             let data_ty = [];
             for(let i in Joker){
                 data_ty.push([Joker[i], JokerGuide[i]])
             }
             const useData = this.perGudType=='ty'?Joker:this.perGudType=='ff'?ws1:ws2;
-            
+            console.log('被使用的数据', type,e.target,useData);
             const tyActionList = []
 
             //创建坐标系
@@ -1015,6 +1017,7 @@ export default {
             // console.log(type);
             // type == 'ty' && ty_show();
             ty_show();
+            
 
             this.mixScriptLineGenerate();
         },
@@ -1057,7 +1060,9 @@ export default {
                 1, 1, 1, 1, 1, 1, 1,
                 0
             ]
-            const heartData = this.$store.state.actorEmoSlug
+            // const heartData = this.$store.state.actorEmoSlug;
+            const heartData = this.$store.state.emotionAll;
+            
             let actorArray = []
             actorArray = []
 
@@ -1082,12 +1087,13 @@ export default {
             let actor_emo = name_set.map(d => {
                 return { 'name': d, 'emo': actorArray[d] }
             })
-
+            console.log(heartData, actor_emo, emoConstrast);
             const emoScale = d3.scaleOrdinal().domain(emoConstrast).range(axeConstrast)
 
             const line = d3.line()
+                .defined(d=>d!=='')
                 .y((d, r) => {
-                    return r * 20
+                    return r * 20 + 20
                 })
                 .x((d, r) => 100 + 40 * emoScale(d))
 
@@ -1095,6 +1101,22 @@ export default {
             d3.select("#emo_line").selectAll('*').remove()
             const svg = d3.select("#emo_line").append('svg').attr('width', '100%').attr('height', '100%').attr('transform','translate(0,30)')
 
+            svg 
+                .append("line")
+                .attr('x1',20)
+                .attr('x2',280)
+                .attr('y1',20)
+                .attr('y2',20)
+                .attr('stroke', 'black')
+                .attr('stroke-width', '5px')
+            svg 
+                .append("line")
+                .attr('x1',150)
+                .attr('x2',150)
+                .attr('y1',20)
+                .attr('y2',1000)
+                .attr('stroke', 'black')
+                .attr('stroke-width', '5px')
             // 
             const lG = svg.append('g').attr('class', 'lg')
             let a = 0
@@ -1149,7 +1171,7 @@ export default {
                     .text(d);
                 let emoRing = div.append("div").attr("class", "emoRing");
                 that.emoRingDraw(emoRing);
-                console.log(d, idx, div);
+                // console.log(d, idx, div);
             });
         },
         emoRingDraw(div) {
