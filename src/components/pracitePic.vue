@@ -1566,14 +1566,16 @@ import NP, { divide } from 'number-precision'
         overflow: hidden;
         width: 100%;
         height: 70px;
-        border: solid rgb(196, 59, 196) 2px;
+        /* border: solid rgb(196, 59, 196) 2px; */
+        border: solid gainsboro 2px;
 
     }
     .emoRing{
         float: left;
         width: 30%;
         height: 100%;
-        background-color: rgb(171, 214, 217);
+        /* background-color: rgb(171, 214, 217);8aa3c8 */
+        background-color: #b3cbef;
     }
     .dialogueActor{
         padding: 5px;

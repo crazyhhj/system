@@ -12,7 +12,7 @@ const store = createStore({
     metaIndex: 0,
     sluglinesMeta: [{ 'door': '', 'place': '', 'time': '' }],
     locData: {},
-
+    emotionAll:'',
     // 每个人物出现章节 以及感情信息
     actorEverySlug: {},
     screenPlay: [],
@@ -138,6 +138,21 @@ const store = createStore({
             let msg = res.data;
             // console.log(res.data);
             _self.actorEmoSlug = msg;
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
+
+    },
+    getEmotionAll(state) {
+      let _self = state;
+      axios.get('http://127.0.0.1:5000/api/post/emotion')
+        .then(
+          res => {
+            let msg = res.data;
+            // console.log(res.data);
+            _self.emotionAll = msg;
           }
         )
         .catch((error) => {

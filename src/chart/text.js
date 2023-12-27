@@ -22,6 +22,25 @@ let Joker = [
     `He opens his eyes to see what he did, with a smoking gun in his hand`,
     `He turns back to grab his bag and his wig, his hands shaking from the adrenaline`,
 ]
+let JokerGudie = [`Conveying the actor's thoughts and confusion through facial expressions and body language.`
+    , `Emphasizing the attention to detail and accuracy in maintaining the painted face, expressing the actor's focus on appearance and self-awareness.`
+    , `Conveying the actor's attention and protectiveness towards the bag through posture and gaze, portraying the significance and nervousness associated with the item.`
+    , `Demonstrating the actor's attention and self-identity through touching, adjusting the wig, and facial expressions.`
+    , `Paying attention to the actor's body language, breathing, and facial expressions to convey their inner anxiety and hesitation.`
+    , `Expressing the actor's reaction to the woman being harassed through explosive laughter and the action of covering the mouth.`
+    , `Conveying increased happiness and excitement due to being noticed by others through more intense laughter and facial expressions.`
+    , ` Conveying embarrassment and uneasiness through eye contact, facial expressions, and the action of looking down.`
+    , ` Emphasizing the actor's sudden change of being pulled back through body reactions and posture, portraying their surprise.`
+    , ` Conveying the request for them to stop through head shaking, suppressing laughter, and pleading facial expressions.`
+    , `Emphasizing the actor's actions and gestures while taking out the apology card from the bag.`
+    , `Paying attention to the actor's body reactions and hand movements, portraying the sudden change of having the bag snatched and the actor's disappointment.`
+    , ` Emphasizing the actor's body movements and pursuit of the goal, portraying the determination to retrieve the bag.`
+    , `Paying attention to the actor's hand movements and body reactions, portraying the sudden change of the bag being thrown away and the actor's frustration.`
+    , `Conveying the persistence for the bag through continuous pursuit and facial expression changes, expressing the shock of suddenly being attacked.`
+    , `Emphasizing the slow fall and painful facial expressions, expressing the emotional impact of being injured.`
+    , `Paying attention to the body's fall and efforts to get up, portraying the actor's struggle and attempts.`
+    , `Emphasizing the actor's gaze and hand movements, expressing the actor's shock and regret for their actions.`
+    , `Paying attention to the actor's body movements and trembling hands, portraying the nervousness associated with adrenaline while grabbing the bag and wig.`]
 
 let ws1 = [
     `Eats french fries out of a greasy McDonald's bag.`,
@@ -37,16 +56,16 @@ let ws1 = [
     `He finishes singing the song`]
 
 let ws2 = [
-`    Engages in an argument with Wall Street #1 about the young woman's interest.`,
-`Takes a swig from a brown bag he is carrying.`,
-`Claims that the young woman wasn't interested at all.`,
-`Shares a look with the other two guys when she declines the offer of french fries.`,
+    `    Engages in an argument with Wall Street #1 about the young woman's interest.`,
+    `Takes a swig from a brown bag he is carrying.`,
+    `Claims that the young woman wasn't interested at all.`,
+    `Shares a look with the other two guys when she declines the offer of french fries.`,
     `He cracks up and follows after Wall Street #1 as he sings`,
     `He sits down on the other side of Joker, sandwiching him between them`,
     `He asks Joker what's so fucking funny`];
 
 let ws3 = [
-`    Enters the subway car with two other guys.`,
+    `    Enters the subway car with two other guys.`,
     `Offers french fries to the young woman.`,
     `Tries to get her attention by shaking the McDonald's bag.`,
     `Feels embarrassed when she declines the fries.`,
@@ -69,8 +88,13 @@ let youngWomen = [
 
 export const subwayData = {
     'Joker': Joker,
-    'ws1':ws1,
-    'ws2':ws2,
-    'ws3':ws3,
+    'JokerGuide': JokerGudie,
+    'ws1': ws1,
+    'ws2': ws2,
+    'ws3': ws3,
     'young_women': youngWomen
 }
+
+
+
+

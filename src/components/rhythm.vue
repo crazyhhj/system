@@ -93,10 +93,9 @@ export default {
                 const init  = this.$store.state.initTrendList;
                 const that = this;
                 for(let i of init){
-                    if(showChapter1 in i){
+                    if(i.includes(showChapter1)){
                         that.trendList = i
                         that.showRhythmLine();
-                        console.log('be use');
                     }
                 }
             }, deep: true
@@ -106,6 +105,7 @@ export default {
     methods: {
         clear() {
             this.$store.commit('clearTrendList');
+            this.trendList = [];
         },
         showRhythmLine() {
             const that = this;
@@ -134,8 +134,8 @@ export default {
             // console.log(data[0]);
             // const data = this.rhythmDetailData[index];
             const dataOrg = this.$store.state.rhythmDetailData;
-            const showList = this.$store.state.trendList;
-            // const showList = this.trendList;
+            // const showList = this.$store.state.trendList;
+            const showList = this.trendList;
             if (showList.length > 0) {
                 this.showChapter1 = showList[0];
                 this.showChapter2 = showList[showList.length - 1];
@@ -662,7 +662,8 @@ export default {
             d3.select("#timerect").selectAll("*").remove();
             const _self = this;
             const vaildEvent = this.$store.state.event_type;
-            const showList = this.$store.state.trendList;
+            // const showList = this.$store.state.trendList;
+            const showList = this.trendList;
             // console.log('事件类型', vaildEvent);
             const sluglinesMeta = this.$store.state.sluglinesMeta;
             // let initList = this.initList;
@@ -878,7 +879,11 @@ export default {
             const type = e.target.id;
             const that = this;
             this.perGudType = type
-            const { Joker, ws1, ws2, ws3, young_women } = subwayData;
+            const { Joker,JokerGuide, ws1, ws2, ws3, young_women } = subwayData;
+            let data_ty = [];
+            for(let i in Joker){
+                data_ty.push([Joker[i], JokerGuide[i]])
+            }
             const useData = this.perGudType=='ty'?Joker:this.perGudType=='ff'?ws1:ws2;
             
             const tyActionList = []
@@ -931,7 +936,31 @@ export default {
                 .call(yAxis)
 
             const ty_show = () => {
+                const core = (type == 'ty')?
                 mainSvg
+                    .selectAll('.ring_ty')
+                    .data(data_ty)
+                    .join('circle')
+                    .attr('class', 'ring_ty')
+                    .attr('r', d => sizeScale(d[0].length))
+                    .attr('cx', (d, r) => xScale(d[0]) + 20)
+                    .attr('cy', d => yScale_2(d[0].length))
+                    .style('fill', '#8aa3c8')
+                    .style('opacity', '.5')
+                    .on('mouseover', (e,d)=>{
+                        let xy = [e.offsetX, e.offsetY]
+                        mainSvg_org
+                        .append('text')
+                        .attr('id', 'context')
+                        .attr('x', 0)
+                        .attr('y',400)
+                        .style('font-size', '20')
+                        .text(`${d[1]}`)
+                    })
+                    .on('mouseout', ()=>{
+                        mainSvg_org.selectAll('#context').remove()
+                    })
+                    :mainSvg
                     .selectAll('.ring_ty')
                     .data(useData)
                     .join('circle')
@@ -941,6 +970,7 @@ export default {
                     .attr('cy', d => yScale_2(d.length))
                     .style('fill', '#8aa3c8')
                     .style('opacity', '.5')
+                    
                 mainSvg
                     .selectAll('.ring_ty_2')
                     .data(useData)
@@ -979,6 +1009,8 @@ export default {
                     .style('stroke', d3.schemeTableau10[2])
                     .style('stroke-width', 3)
                 // .attr('transform', 'translate(100,0)')
+
+                core.raise()
             }
             // console.log(type);
             // type == 'ty' && ty_show();

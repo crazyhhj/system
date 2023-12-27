@@ -56,7 +56,6 @@ export default {
             handler: function (screen_num){
 
                 const slugIndexList = screen_num[screen_num.length - 1]
-                console.log('be watch');
                 this.drawRelationByIndex(slugIndexList);
             },deep:true   
         }
@@ -251,9 +250,8 @@ export default {
         
 
         drawRelationByIndex(index){
-            console.log("已经执行");
             const nodeLink = toRaw(this.$store.state.relation);
-            console.log("nodeLink 是",nodeLink);
+            // console.log("nodeLink 是",nodeLink);
             const data0 = nodeLink.map(d => ({nodes: Array.from(new Set(d.flatMap(l => [l.source, l.target])),id=>({id})), links:d}))
             const data = data0[index]
             // console.log(rData);

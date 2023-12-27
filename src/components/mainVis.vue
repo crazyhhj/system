@@ -76,7 +76,7 @@ export default {
         },
         slugId: {
             handler: function (newVal) {
-                console.log('yyyyyyyyyyyy', newVal);
+                // console.log('yyyyyyyyyyyy', newVal);
             }, deep: true
         },
 
@@ -218,7 +218,7 @@ export default {
                 .join('use')
                 .attr('class', 'index')
                 .attr('xlink:href', '#detail')
-                .attr('x', 250)
+                .attr('x', 180)
                 .attr('y', (d, r) => r * 90 + 50 - 5)
                 // .style('fill','none')
                 .style('stroke', 'black')
@@ -472,8 +472,27 @@ export default {
             const personGroup = chart.selectAll('.personGroup')
                 .data(plotPerson)
                 .join('g')
-                .attr('class', 'personGroup')
+                .attr('class', (d,r)=>'personGroup'+`${r}`)
                 .attr('transform', (d, r) => `translate(${r % 2 == 0 ? 250 : 300},${0 + r * door_padding + 50})`)
+                .on('mouseenter', function(e,d,r){
+                    // d3.select(this).selectAll('*').attr('transform', 'scale(1.5)')
+                    d3.select(this)
+                    .append('rect')
+                    .attr('class', 'sign_modfiy')
+                    .attr('width',d => (d.length -1 )*13 +64)
+                    .attr('height',64)
+                    .attr('x',-32 +50)
+                    .attr('y',-32)
+                    .attr('rx', 8)
+                    .attr('ry', 8)
+                    .style('fill', 'none')
+                    .style('stroke', 'pink')
+                    .style('stroke-width', '5')
+                })
+                .on('mouseout', function(){
+                    d3.select(this).selectAll('.sign_modfiy').remove()
+                })
+            
 
             //岛屿外边框，容器
             personGroup.append('rect')
@@ -483,10 +502,10 @@ export default {
                 .attr('ry', 6)
                 .attr('width', d => (d.length - 1) * 13 + 16)
                 .attr('height', 16)
-                .style('fill', 'none')
+                .style('fill', 'white')
                 .style('stroke', 'black')
                 .style('stroke-width', '1')
-
+                
 
             //岛屿角色-底色
             personGroup.selectAll('.person_in_plot')
@@ -555,7 +574,7 @@ export default {
                         .append('text')
                         .attr('id', 'context')
                         .attr('x', xy[0] + 10)
-                        .attr('y', xy[1])
+                        .attr('y', xy[1]-15)
                         .style('font-size', '13')
                         .text(`${t1}`)
 

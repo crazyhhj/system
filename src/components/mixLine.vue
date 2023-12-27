@@ -50,7 +50,7 @@ export default {
         },
         slugId: {
             handler: function (newVal) {
-                console.log('yyyyyyyyyyyy', newVal);
+                // console.log('yyyyyyyyyyyy', newVal);
             }, deep: true
         },
 

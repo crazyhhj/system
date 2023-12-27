@@ -33,7 +33,7 @@ export default {
             // ↓↓↓↓↓↓↓↓↓↓data↓↓↓↓↓↓↓↓↓↓
             d3.select("#actorEmoArea").selectAll("*").remove()
             const emoData = this.$store.state.actorEmoSlug[index]
-            console.log(emoData);
+            // console.log(emoData);
 
             //emotion map
             const emoConstrast = [
@@ -83,7 +83,7 @@ export default {
             emo = emo.map(d => d.map(d => d + .1))
             //得到大小值
             const maxValue = d3.max(emo.map(d => (d3.max(d))));
-            console.log(actor, emo, maxValue);
+            // console.log(actor, emo, maxValue);
             //↑↑↑↑↑↑↑↑data↑↑↑↑↑↑↑↑
 
             const measure = '100%';
@@ -112,19 +112,19 @@ export default {
             const yScale = d3.scaleLinear().domain([-border, border]).range([-redaSize, redaSize])
             const colorScale = d3.scaleOrdinal([0, 1, 2, 3, 4, 5, 6], d3.schemeTableau10)
             // const 
-            console.log(redaData);
+            // console.log(redaData);
 
             //builds out axes
             let axesData = new Array(5).fill(Math.ceil(maxValue / 5))
             axesData = axesData.map((d, i) => d * (i + 1))
             function coordinateAxes(axesValue) {
                 const cda = new Array(7).fill(axesValue);
-                console.log(cda);
+                // console.log(cda);
                 let polar = cda.map((d, i) => coordinateTransformer(d, i));
                 return polar
             }
             let axesArray = axesData.map(d => coordinateAxes(d))
-            console.log("坐标轴数据", axesArray);
+            // console.log("坐标轴数据", axesArray);
             const svg = d3.select("#actorEmoArea")
                 .append("svg")
                 .attr("width", width)

@@ -189,6 +189,7 @@ export default {
       this.$store.commit('getEventType');
       this.$store.commit('getGptText');
       this.$store.commit('getRhythmDetail');
+      this.$store.commit('getEmotionAll');
     },
     getSchedulingData() {
       axios.get("http://127.0.0.1:5000/api/post/scheduling")
