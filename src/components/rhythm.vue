@@ -530,15 +530,13 @@ export default {
                     })
                 );
                 myChart.on("click", params => {
-                    let index = params.dataIndex;
-                    console.log(index, data[index].idx, data[index]);
-                    that.showtext = data[index].screen;
+                    that.showChain();
                 })
             };
             showList.length == 0 ? doChart(quickLookData) : doChartTwo(data);
             // doChart(data)
             option && myChart.setOption(option);
-            this.showChain();
+            // this.showChain();
             showList.length == 0 ? null : this.mixTrend();
         },
         showChain() {
@@ -1063,40 +1061,41 @@ export default {
             // const heartData = this.$store.state.actorEmoSlug;
             const heartData = this.$store.state.emotionAll;
             
-            let actorArray = []
-            actorArray = []
+            // let actorArray = []
+            // actorArray = []
 
-            for (let index = 0; index < heartData.length; index++) {
-                const element = heartData[index];
-                for (let tick = 0; tick < element.length; tick++) {
-                    const unit = element[tick];
-                    if (!actorArray[unit['name']]) {
-                        actorArray[unit['name']] = []
-                        actorArray[unit['name']].push([...unit['emotion']])
-                    }
-                    else {
-                        actorArray[unit['name']].push([...unit['emotion']])
-                    }
+            // for (let index = 0; index < heartData.length; index++) {
+            //     const element = heartData[index];
+            //     for (let tick = 0; tick < element.length; tick++) {
+            //         const unit = element[tick];
+            //         if (!actorArray[unit['name']]) {
+            //             actorArray[unit['name']] = []
+            //             actorArray[unit['name']].push([...unit['emotion']])
+            //         }
+            //         else {
+            //             actorArray[unit['name']].push([...unit['emotion']])
+            //         }
 
-                }
+            //     }
 
-            }
+            // }
 
 
-            let name_set = [...new Set(heartData[index].map(d => d.name))]
-            let actor_emo = name_set.map(d => {
-                return { 'name': d, 'emo': actorArray[d] }
-            })
-            console.log(heartData, actor_emo, emoConstrast);
+            // let name_set = [...new Set(heartData[index].map(d => d.name))]
+            // let actor_emo = name_set.map(d => {
+            //     return { 'name': d, 'emo': actorArray[d] }
+            // })
+            // console.log(heartData, actor_emo, emoConstrast);
             const emoScale = d3.scaleOrdinal().domain(emoConstrast).range(axeConstrast)
 
             const line = d3.line()
-                .defined(d=>d!=='')
+                // .defined(d=>d!=='')
                 .y((d, r) => {
-                    return r * 20 + 20
+                    return r * 20 + 40
                 })
-                .x((d, r) => 100 + 40 * emoScale(d))
-
+                .x((d, r) => d==''?100:100 + 40 * emoScale(d))
+                .curve(d3.curveBasis)
+            
 
             d3.select("#emo_line").selectAll('*').remove()
             const svg = d3.select("#emo_line").append('svg').attr('width', '100%').attr('height', '100%').attr('transform','translate(0,30)')
@@ -1116,30 +1115,47 @@ export default {
                 .attr('y1',20)
                 .attr('y2',1000)
                 .attr('stroke', 'black')
-                .attr('stroke-width', '5px')
+                .attr('stroke-width', '3px')
             // 
             const lG = svg.append('g').attr('class', 'lg')
             let a = 0
-            actor_emo.forEach(element => {
-                let blank = new Array(10).fill('nn')
-                let data = element['emo']
-                let data_f = []
-                if (element['name'] == 'JOKER') {
-                    data = data.slice(index, index + 1)
-                }
-                data.forEach(e => {
-                    data_f.push(...e);
-                    data_f.push(...blank)
-                })
+            const emo_index = heartData[index];
+            emo_index.forEach(element => {
+                
+                // let blank = new Array(10).fill('nn')
+                let data = element['emotion']
+                // let data_f = []
+                // if (element['name'] == 'JOKER') {
+                //     data = data.slice(index, index + 1)
+                // }
+                // data.forEach(e => {
+                //     data_f.push(...e);
+                //     data_f.push(...blank)
+                // })
+                // console.log(actor_emo,data,data_f);
                 // lG.append('g').attr('transform', 'translate(0,'+100*a+')')
                 lG.append('g').attr('transform', 'translate(0,' + ')')
                     .append('path')
                     .attr('class', 'line')
-                    .attr('d', line(data_f))
+                    .attr('d', line(data))
                     .attr('fill', 'none')
                     .style('stroke', d3.schemeTableau10[a])
                     .style('stroke-width', 10)
+                    .style('opacity', .7)
                     .attr('transform', 'translate(100,0)')
+                // lG.append('g')
+                //     .selectAll('.emoCir')
+                //     .data(data)
+                //     .join('circle')
+                //     .attr('class', 'emoCir')
+                //     .attr('r', 6)
+                //     .attr('cx',(d, r) => (100 + 40 * emoScale(d)) )
+                //     .attr('cy', (d,r) => (r * 20 + 40))
+                //     .style('fill', 'white')
+                //     .style('stroke', 'black')
+                //     .style('opacity', d=>d==''?0:1)
+                //     .attr('transform', 'translate(100,0)')
+
 
                 a += 1
 
