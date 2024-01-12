@@ -267,7 +267,7 @@ export default {
                 "green", "green", "green", "green", "green", "green", "green", "green", "green", "green",
                 "gray", "gray", "gray", "gray", "gray", "gray", "gray",
             ]
-            console.log(colorConstrast.length, emoConstrast.length)
+            // console.log(colorConstrast.length, emoConstrast.length)
             for (let key in orgData) {
                 data.push(orgData[key])
                 actorList.push(key)
